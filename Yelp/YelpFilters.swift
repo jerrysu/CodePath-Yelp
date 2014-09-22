@@ -33,10 +33,10 @@ class YelpFilters {
             name: "radius_filter",
             options: [
                 Option(label: "Auto", value: "", selected: true),
-                Option(label: "2 blocks", value: "250"),
-                Option(label: "6 blocks", value: "750"),
-                Option(label: "1 mile", value: "1609"),
-                Option(label: "5 miles", value: "8047")
+                Option(label: "Within 4 blocks", value: "1000"),
+                Option(label: "Walking (1 mile)", value: "1609"),
+                Option(label: "Biking (2 miles)", value: "3218"),
+                Option(label: "Driving (5 miles)", value: "8047")
             ],
             type: .Single
         ),
