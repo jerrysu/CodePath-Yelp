@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search-->
         <scene sceneID="A65-IB-fkg">
             <objects>
                 <tableViewController id="jNO-Mg-y5a" customClass="ViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,7 +15,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessTableViewCell" rowHeight="128" id="cts-tg-ZAw" customClass="BusinessTableViewCell" customModule="Yelp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="BusinessTableViewCell" rowHeight="116" id="cts-tg-ZAw" customClass="BusinessTableViewCell" customModule="Yelp" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cts-tg-ZAw" id="vBv-Ld-kSo">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -45,7 +45,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kig-e5-PPE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kig-e5-PPE">
                                             <rect key="frame" x="116" y="77" width="476" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,27 +103,64 @@
                             <outlet property="delegate" destination="jNO-Mg-y5a" id="Fbm-H9-Z1G"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="IpC-Nn-z0k">
-                        <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="jN5-oY-LmE"/>
-                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="4iq-NX-sPF">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
+                    <navigationItem key="navigationItem" title="Search" id="IpC-Nn-z0k">
+                        <barButtonItem key="leftBarButtonItem" title="Filter " id="jN5-oY-LmE">
+                            <connections>
+                                <action selector="onFilterButtonTapped:" destination="jNO-Mg-y5a" id="XoF-ao-yWo"/>
+                                <segue destination="wSE-E3-Meh" kind="presentation" identifier="" id="Kej-Mk-vzY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title=" Map" id="Xhp-iR-MZB"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfv-tM-Ep0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1139" y="320"/>
         </scene>
+        <!--Filters-->
+        <scene sceneID="cZU-8W-QDS">
+            <objects>
+                <tableViewController id="vba-9S-mzm" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Vm5-IY-ZPL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="gOU-Gv-beq">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gOU-Gv-beq" id="oCL-SF-7zz">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vba-9S-mzm" id="YPH-2b-qbW"/>
+                            <outlet property="delegate" destination="vba-9S-mzm" id="6qW-95-eVb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Filters" id="kwg-rz-ZX9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3XS-Il-3V3">
+                            <connections>
+                                <action selector="handleCancelButton:" destination="vba-9S-mzm" id="bQS-O5-3Sz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="Xxo-3A-vW0">
+                            <connections>
+                                <action selector="handleSearchButton:" destination="vba-9S-mzm" id="R9o-cV-86i"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8uq-r1-BW8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2682" y="320"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fdb-oP-IC2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IwP-50-kOM" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jh5-VN-lAp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -136,6 +173,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uRT-EI-SF5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="310" y="323.99999999999994"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6hC-bn-XPX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wSE-E3-Meh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tkG-px-w6L">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vba-9S-mzm" kind="relationship" relationship="rootViewController" id="VrU-k9-G1m"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bRV-CH-9UM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1870" y="320"/>
         </scene>
     </scenes>
 </document>

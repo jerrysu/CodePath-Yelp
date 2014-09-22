@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ViewController: UITableViewController, UISearchBarDelegate {
+class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewControllerDelegate {
 
     var searchBar: UISearchBar?
 
@@ -66,7 +66,8 @@ class ViewController: UITableViewController, UISearchBarDelegate {
     }
 
     func performSearch(term: String, offset: Int = 0, limit: Int = 20) {
-        client.searchWithTerm(term, offset: offset, limit: 20, success: {
+        var parameters = YelpFilters.instance.getParameters()
+        client.searchWithTerm(term, parameters: parameters, offset: offset, limit: 20, success: {
             (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let businesses = (response["businesses"] as Array).map({
                 (business: NSDictionary) -> YelpBusiness in
@@ -129,6 +130,26 @@ class ViewController: UITableViewController, UISearchBarDelegate {
         tableView.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.destinationViewController is UINavigationController {
+            let navigationController = segue.destinationViewController as UINavigationController
+            if navigationController.viewControllers[0] is FiltersViewController {
+                let controller = navigationController.viewControllers[0] as FiltersViewController
+                controller.delegate = self
+            }
+        }
+    }
+
+    func onFiltersDone(controller: FiltersViewController) {
+        if self.term != "" {
+            self.businesses = []
+            self.offset = 0
+            self.tableView.reloadData();
+            self.tableView.showsInfiniteScrolling = true
+            self.tableView.triggerInfiniteScrolling()
+        }
     }
 
 }
