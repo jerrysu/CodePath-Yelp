@@ -12,6 +12,7 @@ class YelpBusiness {
 
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
+        println(dictionary)
     }
 
     var name: String {
@@ -38,6 +39,15 @@ class YelpBusiness {
     var reviewCount: Int {
         get {
             return self.dictionary["review_count"] as Int
+        }
+    }
+
+    var deals: Array<AnyObject>? {
+        get {
+            if let deals = self.dictionary["deals"] as? Array<AnyObject> {
+                return deals
+            }
+            return nil
         }
     }
 

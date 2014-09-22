@@ -116,6 +116,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewCon
         cell.distanceLabel.text = String(format: "%.1f mi", 3963.1 * c)
         cell.distanceLabel.sizeToFit()
 
+        cell.dealsImage.hidden = business.deals == nil
+
         cell.layoutIfNeeded()
 
         return cell
