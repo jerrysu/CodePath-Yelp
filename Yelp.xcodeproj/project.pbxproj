@@ -18,7 +18,7 @@
 		E58368AB19CE813C00BF73C1 /* BusinessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58368AA19CE813C00BF73C1 /* BusinessTableViewCell.swift */; };
 		E58368AD19CE842D00BF73C1 /* YelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58368AC19CE842D00BF73C1 /* YelpBusiness.swift */; };
 		E5948BE419D008E000FAAD32 /* YelpFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5948BE319D008E000FAAD32 /* YelpFilters.swift */; };
-		E5C44F5A19D0DA1100E351B4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C44F5919D0DA1100E351B4 /* CoreLocation.framework */; };
+		E5C44F5B19D0E19A00E351B4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C44F5919D0DA1100E351B4 /* CoreLocation.framework */; };
 		E5CD085E19CFB82C0043EDBB /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CD085D19CFB82C0043EDBB /* FiltersViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5C44F5A19D0DA1100E351B4 /* CoreLocation.framework in Frameworks */,
+				E5C44F5B19D0E19A00E351B4 /* CoreLocation.framework in Frameworks */,
 				03D1A025B413415787AD3DF3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

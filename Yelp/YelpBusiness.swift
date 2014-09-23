@@ -12,7 +12,6 @@ class YelpBusiness {
 
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        println(dictionary)
     }
 
     var name: String {
@@ -51,22 +50,22 @@ class YelpBusiness {
         }
     }
 
-    var latitude: CGFloat? {
+    var latitude: Double? {
         get {
             if let location = self.dictionary["location"] as? NSDictionary {
                 if let coordinate = location["coordinate"] as? NSDictionary {
-                    return (coordinate["latitude"] as CGFloat)
+                    return (coordinate["latitude"] as Double)
                 }
             }
             return nil
         }
     }
 
-    var longitude: CGFloat? {
+    var longitude: Double? {
         get {
             if let location = self.dictionary["location"] as? NSDictionary {
                 if let coordinate = location["coordinate"] as? NSDictionary {
-                    return (coordinate["longitude"] as CGFloat)
+                    return (coordinate["longitude"] as Double)
                 }
             }
             return nil

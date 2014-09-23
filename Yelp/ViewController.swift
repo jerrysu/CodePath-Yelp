@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Jerry Su. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import CoreLocation
 
-class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewControllerDelegate {
+class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewControllerDelegate, CLLocationManagerDelegate {
 
     var searchBar: UISearchBar?
 
@@ -25,13 +25,15 @@ class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewCon
     var offset: Int = 0
 
     var businesses: Array<YelpBusiness> = []
-    var latitude: CGFloat = 37.7710347
-    var longitude: CGFloat = -122.4040795
+    var latitude: Double = 37.7710347
+    var longitude: Double = -122.4040795
+
+    let locationManager: CLLocationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
+        self.client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 116
@@ -44,6 +46,11 @@ class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewCon
         self.searchBar!.delegate = self
         self.searchBar!.placeholder = "Search"
         self.navigationItem.titleView = self.searchBar
+
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -67,7 +74,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewCon
 
     func performSearch(term: String, offset: Int = 0, limit: Int = 20) {
         var parameters = YelpFilters.instance.getParameters()
-        client.searchWithTerm(term, parameters: parameters, offset: offset, limit: 20, success: {
+        self.client.searchWithTerm(term, parameters: parameters, offset: offset, limit: 20, success: {
             (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let businesses = (response["businesses"] as Array).map({
                 (business: NSDictionary) -> YelpBusiness in
@@ -109,8 +116,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewCon
         cell.addressLabel.text = business.displayAddress
         cell.categoriesLabel.text = business.displayCategories
 
-        let dlat = Double(self.latitude - business.latitude!) * M_PI / 180
-        let dlon = Double(self.longitude - business.longitude!) * M_PI / 180
+        let dlat = (self.latitude - business.latitude!) * M_PI / 180
+        let dlon = (self.longitude - business.longitude!) * M_PI / 180
         let a = pow(sin(dlat / 2), 2) + cos(Double(business.latitude!) * M_PI / 180) * cos(Double(self.latitude) * M_PI / 180) * pow(sin(dlon / 2), 2)
         let c = 2 * atan2(sqrt(a), sqrt(1-a))
         cell.distanceLabel.text = String(format: "%.1f mi", 3963.1 * c)
@@ -154,5 +161,31 @@ class ViewController: UITableViewController, UISearchBarDelegate, FiltersViewCon
         }
     }
 
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println("error = \(error)")
+    }
+
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {
+            (placemarks, error) ->Void in
+
+            if error != nil {
+                println("error = \(error)")
+                return
+            }
+
+            if placemarks.count > 0 {
+                let placemark = placemarks[0] as CLPlacemark
+                println(placemark.locality)
+            }
+        })
+
+        let location = locations.last as CLLocation
+        if location.horizontalAccuracy > 0 {
+            self.locationManager.stopUpdatingLocation()
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+        }
+    }
 }
 
