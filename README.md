@@ -33,6 +33,7 @@ Some extra, noteworthy features that were implemented:
 
   * Uses CoreLocation to enable location-aware searches and show user's location in the map view.
   * Created an animated loading indicator using Yelp's logo with `UIImage.animatedImageName` 
+  * I implemented many of the searching and browsing features in the map view as well. Moving the map will show a "Redo Search In This Area" button which will use the bounds of the map view to perform a Yelp search.
 
 ### Installation
 
