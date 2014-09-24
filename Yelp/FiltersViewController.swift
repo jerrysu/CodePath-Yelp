@@ -8,7 +8,7 @@
 
 class FiltersViewController: UITableViewController {
 
-    var delegate: FiltersViewControllerDelegate?
+    var delegate: FiltersViewDelegate?
 
     var model: YelpFilters?
 
@@ -143,10 +143,6 @@ class FiltersViewController: UITableViewController {
         }
     }
 
-    func getParameters() -> Dictionary<String, String> {
-        return self.model!.getParameters()
-    }
-
     @IBAction func handleSearchButton(sender: AnyObject) {
         // Commit the changes to the global instance of the filters
         YelpFilters.instance.copyStateFrom(self.model!)
@@ -161,6 +157,6 @@ class FiltersViewController: UITableViewController {
 
 }
 
-protocol FiltersViewControllerDelegate {
+protocol FiltersViewDelegate {
     func onFiltersDone(controller: FiltersViewController)
 }

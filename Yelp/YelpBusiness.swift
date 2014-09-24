@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Jerry Su. All rights reserved.
 //
 
+import CoreLocation
+
 class YelpBusiness {
 
     var dictionary: NSDictionary
@@ -72,13 +74,30 @@ class YelpBusiness {
         }
     }
 
-    var displayAddress: String {
+    var location: CLLocation {
+        get {
+            return CLLocation(latitude: self.latitude!, longitude: self.longitude!)
+        }
+    }
+
+    var shortAddress: String {
         get {
             if let location = self.dictionary["location"] as? NSDictionary {
                 if let address = location["address"] as? Array<String> {
                     if let neighborhoods = location["neighborhoods"] as? Array<String> {
                         return ", ".join(address + [neighborhoods[0]])
                     }
+                    return ", ".join(address)
+                }
+            }
+            return ""
+        }
+    }
+
+    var displayAddress: String {
+        get {
+            if let location = self.dictionary["location"] as? NSDictionary {
+                if let address = location["display_address"] as? Array<String> {
                     return ", ".join(address)
                 }
             }

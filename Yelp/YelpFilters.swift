@@ -168,33 +168,35 @@ class YelpFilters {
         }
     }
 
-    func getParameters() -> Dictionary<String, String> {
-        var parameters = Dictionary<String, String>()
-        for filter in self.filters {
-            switch filter.type {
-                case .Single:
-                    if filter.name != nil {
-                        let selectedOption = filter.options[filter.selectedIndex]
-                        if selectedOption.value != "" {
-                            parameters[filter.name!] = selectedOption.value
+    var parameters: Dictionary<String, String> {
+        get {
+            var parameters = Dictionary<String, String>()
+            for filter in self.filters {
+                switch filter.type {
+                    case .Single:
+                        if filter.name != nil {
+                            let selectedOption = filter.options[filter.selectedIndex]
+                            if selectedOption.value != "" {
+                                parameters[filter.name!] = selectedOption.value
+                            }
                         }
-                    }
-                case .Multiple:
-                    if filter.name != nil {
-                        let selectedOptions = filter.selectedOptions
-                        if selectedOptions.count > 0 {
-                            parameters[filter.name!] = ",".join(selectedOptions.map({ $0.value }))
+                    case .Multiple:
+                        if filter.name != nil {
+                            let selectedOptions = filter.selectedOptions
+                            if selectedOptions.count > 0 {
+                                parameters[filter.name!] = ",".join(selectedOptions.map({ $0.value }))
+                            }
                         }
-                    }
-                default:
-                    for option in filter.options {
-                        if option.selected && option.name != nil && option.value != "" {
-                            parameters[option.name!] = option.value
+                    default:
+                        for option in filter.options {
+                            if option.selected && option.name != nil && option.value != "" {
+                                parameters[option.name!] = option.value
+                            }
                         }
-                    }
+                }
             }
+            return parameters
         }
-        return parameters
     }
 
     class var instance: YelpFilters {

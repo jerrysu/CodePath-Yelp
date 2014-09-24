@@ -29,9 +29,7 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         var params: NSMutableDictionary = [
             "term": term,
             "offset": offset,
-            "limit": limit,
-            "location": "San Francisco",
-            "cll": "37.7710347,-122.4040795"
+            "limit": limit
         ]
         for (key, value) in parameters! {
             params.setValue(value, forKey: key)
