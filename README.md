@@ -4,7 +4,10 @@ This is a Yelp Search client written in Swift that uses the [Yelp Search API](ht
 
 **Time spent**: Approximately 22 hours total
 
-Since I was playing around with a lot of new APIs and iOS paradigms (AutoLayout, CoreLocation, MapKit, delegates, NotificationCenter, etc), I didn't put a lot of focus in error handling. I'm pretty sure this app will blow up if you are not connected to the Internet or if the Yelp API's responses were missing some details for a particular business.
+### Issues
+
+* There are constraint warnings for my TableViewCells that I couldn't figure out how to remove. I reset all constraints two times and ended up with similar results each time even though I felt the constraints became more minimal and cleaner. There doesn't appear to be any issues with the layout visually.
+* Since I was playing around with a lot of new APIs and iOS paradigms (AutoLayout, CoreLocation, MapKit, delegates, NotificationCenter, etc), I didn't put a lot of focus in error handling. I'm pretty sure this app will blow up if you are not connected to the Internet or if the Yelp API's responses were missing some details for a particular business.
 
 ### Walkthrough
 
