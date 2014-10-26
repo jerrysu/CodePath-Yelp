@@ -53,6 +53,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, FiltersViewDe
 
     final func performSearch(term: String, offset: Int = 0, limit: Int = 20) {
         self.searchBar.text = term
+        self.searchBar.resignFirstResponder()
         self.onBeforeSearch()
         self.client.searchWithTerm(term, parameters: self.getSearchParameters(), offset: offset, limit: 20, success: {
             (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in

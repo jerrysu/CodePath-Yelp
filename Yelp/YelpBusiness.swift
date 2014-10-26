@@ -33,7 +33,7 @@ class YelpBusiness {
 
     var ratingImageURL: NSURL {
         get {
-            return NSURL(string: self.dictionary["rating_img_url_large"] as String)
+            return NSURL(string: self.dictionary["rating_img_url_large"] as String)!
         }
     }
 

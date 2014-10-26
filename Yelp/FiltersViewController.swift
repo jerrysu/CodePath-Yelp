@@ -58,33 +58,33 @@ class FiltersViewController: UITableViewController {
             case .Single:
                 if filter.opened {
                     let option = filter.options[indexPath.row]
-                    cell.textLabel?.text = option.label
+                    cell.textLabel.text = option.label
                     if option.selected {
                         cell.accessoryView = UIImageView(image: UIImage(named: "Check"))
                     } else {
                         cell.accessoryView = UIImageView(image: UIImage(named: "Uncheck"))
                     }
                 } else {
-                    cell.textLabel?.text = filter.options[filter.selectedIndex].label
+                    cell.textLabel.text = filter.options[filter.selectedIndex].label
                     cell.accessoryView = UIImageView(image: UIImage(named: "Dropdown"))
                 }
             case .Multiple:
                 if filter.opened || indexPath.row < filter.numItemsVisible {
                     let option = filter.options[indexPath.row]
-                    cell.textLabel?.text = option.label
+                    cell.textLabel.text = option.label
                     if option.selected {
                         cell.accessoryView = UIImageView(image: UIImage(named: "Check"))
                     } else {
                         cell.accessoryView = UIImageView(image: UIImage(named: "Uncheck"))
                     }
                 } else {
-                    cell.textLabel?.text = "See All"
-                    cell.textLabel?.textAlignment = NSTextAlignment.Center
-                    cell.textLabel?.textColor = .darkGrayColor()
+                    cell.textLabel.text = "See All"
+                    cell.textLabel.textAlignment = NSTextAlignment.Center
+                    cell.textLabel.textColor = .darkGrayColor()
                 }
             default:
                 let option = filter.options[indexPath.row]
-                cell.textLabel?.text = option.label
+                cell.textLabel.text = option.label
                 cell.selectionStyle = UITableViewCellSelectionStyle.None
                 let switchView = UISwitch(frame: CGRectZero)
                 switchView.on = option.selected
